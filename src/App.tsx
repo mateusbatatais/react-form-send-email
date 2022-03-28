@@ -4,14 +4,17 @@ import "./App.scss";
 import api from "./services/api";
 import * as yup from "yup";
 import { Formik } from "formik";
+import MaskedInput from "react-maskedinput";
 
 function App() {
   const schema = yup.object().shape({
-    name: yup.string().required("O nome é obrigatório"),
+    rg: yup.string().required("O nome é obrigatório"),
+    dataEmissao: yup.string().required("Preencha a data"),
   });
 
   interface FormValues {
-    name: string;
+    rg: string;
+    dataEmissao: string;
   }
   const sendForm = (values: FormValues) => {
     try {
@@ -29,15 +32,17 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Container>base</Container>
+        <Container>menu</Container>
       </header>
       <div>
         <Container>
+          <h1>DADOS PESSOAIS</h1>
           <Formik
             validationSchema={schema}
             onSubmit={sendForm}
             initialValues={{
-              name: "",
+              rg: "",
+              dataEmissao: "",
             }}
           >
             {({
@@ -50,19 +55,34 @@ function App() {
               isSubmitting,
             }) => (
               <Form onSubmit={handleSubmit}>
-                <Form.Group controlId="nameCtrl">
-                  <Form.Label>RG</Form.Label>
+                <Form.Group controlId="rgCtrl">
+                  <Form.Label>NÚMERO DO RG</Form.Label>
                   <Form.Control
                     type="text"
-                    name="name"
-                    placeholder="name"
-                    value={values.name}
+                    name="rg"
+                    value={values.rg}
                     onChange={handleChange}
-                    isValid={touched.name && !errors.name}
-                    isInvalid={!!errors.name}
+                    isValid={touched.rg && !errors.rg}
+                    isInvalid={!!errors.rg}
                   />
                   <Form.Control.Feedback type="invalid">
-                    {errors.name}
+                    {errors.rg}
+                  </Form.Control.Feedback>
+                </Form.Group>
+                <Form.Group controlId="dataEmissaoCtrl">
+                  <Form.Label>DATA DE EMISSÃO</Form.Label>
+                  <Form.Control
+                    type="text"
+                    as={MaskedInput}
+                    mask="11/11/1111"
+                    name="dataEmissao"
+                    value={values.dataEmissao}
+                    onChange={handleChange}
+                    isValid={touched.dataEmissao && !errors.dataEmissao}
+                    isInvalid={!!errors.dataEmissao}
+                  />
+                  <Form.Control.Feedback type="invalid">
+                    {errors.dataEmissao}
                   </Form.Control.Feedback>
                 </Form.Group>
                 <Button type="submit" disabled={!isValid || isSubmitting}>
