@@ -1,26 +1,30 @@
-import React, { useState } from "react";
-import { Container, Form, Button } from "react-bootstrap";
+import React from "react";
+import { Container, Form, Button, Spinner } from "react-bootstrap";
 import "./App.scss";
 import api from "./services/api";
 import * as yup from "yup";
 import { Formik } from "formik";
 
 function App() {
-  const [data, setData] = useState<string[]>([]);
-
   const schema = yup.object().shape({
     name: yup.string().required("O nome é obrigatório"),
   });
 
-  // const handleSubmit = () => {
-  //   console.log(formValues);
-  //   api
-  //     .get("/Contact")
-  //     .then((res) => setData(res.data))
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }
+  interface FormValues {
+    name: string;
+  }
+  const sendForm = (values: FormValues) => {
+    try {
+      return api
+        .post("/Contact", values)
+        .then((res) => console.log(res.status))
+        .catch((err) => {
+          console.log(err);
+        });
+    } catch (err) {
+      console.log("ERRO");
+    }
+  };
 
   return (
     <div className="App">
@@ -31,9 +35,7 @@ function App() {
         <Container>
           <Formik
             validationSchema={schema}
-            onSubmit={(values) => {
-              console.log(values);
-            }}
+            onSubmit={sendForm}
             initialValues={{
               name: "",
             }}
@@ -44,12 +46,12 @@ function App() {
               values,
               touched,
               errors,
-              dirty,
               isValid,
+              isSubmitting,
             }) => (
               <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="nameCtrl">
-                  <Form.Label>Nome</Form.Label>
+                  <Form.Label>RG</Form.Label>
                   <Form.Control
                     type="text"
                     name="name"
@@ -63,8 +65,17 @@ function App() {
                     {errors.name}
                   </Form.Control.Feedback>
                 </Form.Group>
-                <Button type="submit" disabled={!(dirty && isValid)}>
-                  Submit form
+                <Button type="submit" disabled={!isValid || isSubmitting}>
+                  CONTINUAR
+                  {isSubmitting && (
+                    <Spinner
+                      as="span"
+                      animation="border"
+                      size="sm"
+                      role="status"
+                      aria-hidden="true"
+                    />
+                  )}
                 </Button>
               </Form>
             )}
