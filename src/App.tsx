@@ -5,16 +5,18 @@ import api from "./services/api";
 import * as yup from "yup";
 import { Formik } from "formik";
 import MaskedInput from "react-maskedinput";
+import selectData from "./data/orgaoEmissor.json";
 
 function App() {
   const schema = yup.object().shape({
     rg: yup.string().required("O nome é obrigatório"),
     dataEmissao: yup.string().required("Preencha a data"),
+    orgaoEmissor: yup.string().required("Escolha uma opção"),
   });
-
   interface FormValues {
     rg: string;
     dataEmissao: string;
+    orgaoEmissor: string;
   }
   const sendForm = (values: FormValues) => {
     try {
@@ -43,6 +45,7 @@ function App() {
             initialValues={{
               rg: "",
               dataEmissao: "",
+              orgaoEmissor: "",
             }}
           >
             {({
@@ -83,6 +86,23 @@ function App() {
                   />
                   <Form.Control.Feedback type="invalid">
                     {errors.dataEmissao}
+                  </Form.Control.Feedback>
+                </Form.Group>
+                <Form.Group controlId="orgaoEmissorCtrl">
+                  <Form.Label>ORGÃO EMISSOR</Form.Label>
+                  <Form.Select
+                    isValid={touched.orgaoEmissor && !errors.orgaoEmissor}
+                    isInvalid={!!errors.orgaoEmissor}
+                    onChange={handleChange}
+                  >
+                    {selectData.orgao_emissor.map((orgao, index) => (
+                      <option key={index} value={orgao.value}>
+                        {orgao.label}
+                      </option>
+                    ))}
+                  </Form.Select>
+                  <Form.Control.Feedback type="invalid">
+                    {errors.orgaoEmissor}
                   </Form.Control.Feedback>
                 </Form.Group>
                 <Button type="submit" disabled={!isValid || isSubmitting}>
