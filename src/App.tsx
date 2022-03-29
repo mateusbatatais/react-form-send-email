@@ -9,8 +9,8 @@ import selectData from "./data/orgaoEmissor.json";
 
 function App() {
   const schema = yup.object().shape({
-    rg: yup.string().required("O nome é obrigatório"),
-    dataEmissao: yup.string().required("Preencha a data"),
+    rg: yup.string().required("O RG é obrigatório"),
+    dataEmissao: yup.date().required("Preencha a data"),
     orgaoEmissor: yup.string().required("Escolha uma opção"),
   });
   interface FormValues {
@@ -22,7 +22,7 @@ function App() {
     try {
       return api
         .post("/Contact", values)
-        .then((res) => console.log(res.status))
+        .then((res) => console.log(res))
         .catch((err) => {
           console.log(err);
         });
@@ -63,6 +63,7 @@ function App() {
                   <Form.Control
                     type="text"
                     name="rg"
+                    maxLength={15}
                     value={values.rg}
                     onChange={handleChange}
                     isValid={touched.rg && !errors.rg}
@@ -88,7 +89,7 @@ function App() {
                     {errors.dataEmissao}
                   </Form.Control.Feedback>
                 </Form.Group>
-                <Form.Group controlId="orgaoEmissorCtrl">
+                <Form.Group controlId="orgaoEmissor">
                   <Form.Label>ORGÃO EMISSOR</Form.Label>
                   <Form.Select
                     isValid={touched.orgaoEmissor && !errors.orgaoEmissor}
