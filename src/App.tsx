@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Form, Button, Spinner } from "react-bootstrap";
 import "./App.scss";
 import api from "./services/api";
@@ -14,12 +14,11 @@ function App() {
     //melhorar validação da data dd/mm/yyyy
     orgaoEmissor: yup.string().required("Escolha uma opção"),
     sexo: yup.array().test({
-      name: "sex test",
+      name: "verifica sexo",
       exclusive: true,
       message: "Você precisa escolher seu sexo",
       test: (value: any) => value.length > 0,
     }),
-    //precisa esconder o outro campo quando um for selecionado.
     //criar validação geral do form
     //validar outros campos apenas ao submit
   });
@@ -122,25 +121,33 @@ function App() {
                 <Form.Group controlId="sexo">
                   <Form.Label>SEXO</Form.Label>
                   <Form.Check
+                    className={
+                      values.sexo && values.sexo[0] === "Feminino"
+                        ? "d-none"
+                        : ""
+                    }
                     isValid={touched.sexo && !errors.sexo}
                     isInvalid={!!errors.sexo}
                     inline
                     label="Masculino"
                     name="sexo"
                     type="checkbox"
-                    value="M"
-                    id="1"
+                    value="Masculino"
                     onChange={handleChange}
                   />
                   <Form.Check
+                    className={
+                      values.sexo && values.sexo[0] === "Masculino"
+                        ? "d-none"
+                        : ""
+                    }
                     isValid={touched.sexo && !errors.sexo}
                     isInvalid={!!errors.sexo}
                     inline
                     label="Feminino"
                     name="sexo"
-                    value="F"
+                    value="Feminino"
                     type="checkbox"
-                    id="2"
                     onChange={handleChange}
                   />
                 </Form.Group>
