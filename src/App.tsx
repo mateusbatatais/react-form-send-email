@@ -11,13 +11,25 @@ function App() {
   const schema = yup.object().shape({
     rg: yup.string().required("O RG é obrigatório"),
     dataEmissao: yup.date().required("Preencha a data"),
+    //melhorar validação da data dd/mm/yyyy
     orgaoEmissor: yup.string().required("Escolha uma opção"),
+    sexo: yup.array().test({
+      name: "sex test",
+      exclusive: true,
+      message: "Você precisa escolher seu sexo",
+      test: (value: any) => value.length > 0,
+    }),
+    //precisa esconder o outro campo quando um for selecionado.
+    //criar validação geral do form
+    //validar outros campos apenas ao submit
   });
   interface FormValues {
     rg: string;
     dataEmissao: string;
     orgaoEmissor: string;
+    sexo: string[];
   }
+
   const sendForm = (values: FormValues) => {
     try {
       return api
@@ -46,6 +58,7 @@ function App() {
               rg: "",
               dataEmissao: "",
               orgaoEmissor: "",
+              sexo: [],
             }}
           >
             {({
@@ -105,6 +118,31 @@ function App() {
                   <Form.Control.Feedback type="invalid">
                     {errors.orgaoEmissor}
                   </Form.Control.Feedback>
+                </Form.Group>
+                <Form.Group controlId="sexo">
+                  <Form.Label>SEXO</Form.Label>
+                  <Form.Check
+                    isValid={touched.sexo && !errors.sexo}
+                    isInvalid={!!errors.sexo}
+                    inline
+                    label="Masculino"
+                    name="sexo"
+                    type="checkbox"
+                    value="M"
+                    id="1"
+                    onChange={handleChange}
+                  />
+                  <Form.Check
+                    isValid={touched.sexo && !errors.sexo}
+                    isInvalid={!!errors.sexo}
+                    inline
+                    label="Feminino"
+                    name="sexo"
+                    value="F"
+                    type="checkbox"
+                    id="2"
+                    onChange={handleChange}
+                  />
                 </Form.Group>
                 <Button type="submit" disabled={!isValid || isSubmitting}>
                   CONTINUAR
