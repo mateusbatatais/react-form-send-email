@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { Container, Form, Button, Spinner, Alert } from "react-bootstrap";
+import {
+  Container,
+  Form,
+  Button,
+  Spinner,
+  Alert,
+  Row,
+  Col,
+} from "react-bootstrap";
 import api from "../../services/api";
 import * as yup from "yup";
 import { Formik } from "formik";
@@ -7,6 +15,7 @@ import MaskedInput from "react-maskedinput";
 import selectData from "../../data/orgaoEmissor.json";
 import { parse } from "date-fns";
 import { FormValues } from "../../interfaces/formValues";
+import styles from "./style.module.scss";
 
 function PersonaData() {
   const schema = yup.object().shape({
@@ -36,7 +45,6 @@ function PersonaData() {
           res.status >= 200 && res.status < 300
             ? setStatus("success")
             : setStatus("danger");
-          console.log(res);
         })
         .catch((err) => {
           setStatus("danger");
@@ -48,47 +56,107 @@ function PersonaData() {
   };
   return (
     <div className="App">
-      <header className="App-header">
-        <Container>menu</Container>
-      </header>
-      <div>
+      <div className={`pt-3 text-light-custom ${styles.bgSoftBlack}`}>
         <Container>
-          {status !== "" && (
-            <Alert variant={status}>
-              <Alert.Heading>
-                {status === "success" ? "Perfeito!" : "Aconteceu um erro"}
-              </Alert.Heading>
-              <p>
-                {status === "success"
-                  ? "Seu formulário foi enviado com sucesso"
-                  : "Algo não ocorreu como esperado. Tente novamente mais tarde"}
-              </p>
-              <hr />
-            </Alert>
-          )}
-          <h1>DADOS PESSOAIS</h1>
-          <Formik
-            validationSchema={schema}
-            validateOnBlur={false}
-            onSubmit={sendForm}
-            initialValues={{
-              rg: "",
-              dataEmissao: "",
-              orgaoEmissor: "",
-              sexo: [],
-            }}
-          >
-            {({
-              handleSubmit,
-              handleChange,
-              values,
-              touched,
-              errors,
-              isValid,
-              isSubmitting,
-            }) => (
-              <Form onSubmit={handleSubmit}>
-                <Form.Group controlId="rgCtrl">
+          <Row>
+            <Col className="pb-3" md={6} lg={3}>
+              <small className="text-blue">me chamo</small>
+              <h5>Paul Irish</h5>
+              <small>
+                <span className="text-blue">CPF</span> 130.212.150-41
+              </small>
+            </Col>
+            <Col className="pb-3" md={6} lg={3}>
+              <small className="text-blue">preciso de</small>
+              <h5>R$ 2.000</h5>
+            </Col>
+            <Col className="pb-3" md={6} lg={3}>
+              <small className="text-blue">quero pagar em</small>
+              <h5>12 vezes</h5>
+            </Col>
+            <Col className="pb-3" md={6} lg={3}>
+              <small className="text-blue">para</small>
+              <h5>Comprar uma bike</h5>
+            </Col>
+          </Row>
+        </Container>
+      </div>
+      <div className={`mb-5 fw-bold ${styles.bgSoftGray}`}>
+        <Container>
+          <Row>
+            <Col className="py-2 d-flex align-items-center opacity-25" md={3}>
+              <div
+                className={`${styles.customCircle} flex-shrink-0 me-2 py-1 rounded-circle text-white d-flex align-items-center justify-content-center ${styles.bgSoftBlack}`}
+              >
+                1
+              </div>
+              <div>SIMULE</div>
+            </Col>
+            <Col className="py-2 d-flex align-items-center" md={3}>
+              <div
+                className={`${styles.customCircle} flex-shrink-0  me-2 py-1 rounded-circle text-blue d-flex align-items-center justify-content-center ${styles.bgSoftBlack}`}
+              >
+                2
+              </div>
+              <div>PREENCHA O CADASTRO</div>
+            </Col>
+            <Col className="py-2 d-flex align-items-center opacity-25" md={3}>
+              <div
+                className={`${styles.customCircle} flex-shrink-0  me-2 py-1 rounded-circle text-black border border-3 border-dark d-flex align-items-center justify-content-center`}
+              >
+                3
+              </div>
+              <div>REVISE SEU PEDIDO</div>
+            </Col>
+            <Col className="py-2 d-flex align-items-center opacity-25" md={3}>
+              <div
+                className={`${styles.customCircle} flex-shrink-0  me-2 py-1 rounded-circle text-black border border-3 border-dark d-flex align-items-center justify-content-center`}
+              >
+                3
+              </div>
+              <div>REALIZE O PEDIDO</div>
+            </Col>
+          </Row>
+        </Container>
+      </div>
+      <Container>
+        {status !== "" && (
+          <Alert variant={status}>
+            <Alert.Heading>
+              {status === "success" ? "Perfeito!" : "Aconteceu um erro"}
+            </Alert.Heading>
+            <p>
+              {status === "success"
+                ? "Seu formulário foi enviado com sucesso"
+                : "Algo não ocorreu como esperado. Tente novamente mais tarde"}
+            </p>
+            <hr />
+          </Alert>
+        )}
+        <h2 className="py-5 text-center fw-bold">DADOS PESSOAIS</h2>
+        <Formik
+          validationSchema={schema}
+          validateOnBlur={false}
+          onSubmit={sendForm}
+          initialValues={{
+            rg: "",
+            dataEmissao: "",
+            orgaoEmissor: "",
+            sexo: [],
+          }}
+        >
+          {({
+            handleSubmit,
+            handleChange,
+            values,
+            touched,
+            errors,
+            isValid,
+            isSubmitting,
+          }) => (
+            <Form onSubmit={handleSubmit}>
+              <Row>
+                <Form.Group controlId="rgCtrl" as={Col} sm={4}>
                   <Form.Label>NÚMERO DO RG</Form.Label>
                   <Form.Control
                     type="text"
@@ -103,7 +171,7 @@ function PersonaData() {
                     {errors.rg}
                   </Form.Control.Feedback>
                 </Form.Group>
-                <Form.Group controlId="dataEmissaoCtrl">
+                <Form.Group controlId="dataEmissaoCtrl" as={Col} sm={4}>
                   <Form.Label>DATA DE EMISSÃO</Form.Label>
                   <Form.Control
                     type="text"
@@ -119,7 +187,7 @@ function PersonaData() {
                     {errors.dataEmissao}
                   </Form.Control.Feedback>
                 </Form.Group>
-                <Form.Group controlId="orgaoEmissor">
+                <Form.Group controlId="orgaoEmissor" as={Col} sm={4}>
                   <Form.Label>ORGÃO EMISSOR</Form.Label>
                   <Form.Select
                     isValid={touched.orgaoEmissor && !errors.orgaoEmissor}
@@ -136,56 +204,56 @@ function PersonaData() {
                     {errors.orgaoEmissor}
                   </Form.Control.Feedback>
                 </Form.Group>
-                <Form.Group controlId="sexo">
-                  <Form.Label>SEXO</Form.Label>
-                  <Form.Check
-                    className={
-                      values.sexo && values.sexo[0] === "Feminino"
-                        ? "d-none"
-                        : ""
-                    }
-                    isValid={touched.sexo && !errors.sexo}
-                    isInvalid={!!errors.sexo}
-                    inline
-                    label="Masculino"
-                    name="sexo"
-                    type="checkbox"
-                    value="Masculino"
-                    onChange={handleChange}
+              </Row>
+
+              <Form.Group controlId="sexo">
+                <Form.Label>SEXO</Form.Label>
+                <Form.Check
+                  className={
+                    values.sexo && values.sexo[0] === "Feminino" ? "d-none" : ""
+                  }
+                  isValid={touched.sexo && !errors.sexo}
+                  isInvalid={!!errors.sexo}
+                  inline
+                  label="Masculino"
+                  name="sexo"
+                  type="checkbox"
+                  value="Masculino"
+                  onChange={handleChange}
+                />
+                <Form.Check
+                  className={
+                    values.sexo && values.sexo[0] === "Masculino"
+                      ? "d-none"
+                      : ""
+                  }
+                  isValid={touched.sexo && !errors.sexo}
+                  isInvalid={!!errors.sexo}
+                  inline
+                  label="Feminino"
+                  name="sexo"
+                  value="Feminino"
+                  type="checkbox"
+                  onChange={handleChange}
+                />
+              </Form.Group>
+
+              <Button type="submit" disabled={!isValid || isSubmitting}>
+                CONTINUAR
+                {isSubmitting && (
+                  <Spinner
+                    as="span"
+                    animation="border"
+                    size="sm"
+                    role="status"
+                    aria-hidden="true"
                   />
-                  <Form.Check
-                    className={
-                      values.sexo && values.sexo[0] === "Masculino"
-                        ? "d-none"
-                        : ""
-                    }
-                    isValid={touched.sexo && !errors.sexo}
-                    isInvalid={!!errors.sexo}
-                    inline
-                    label="Feminino"
-                    name="sexo"
-                    value="Feminino"
-                    type="checkbox"
-                    onChange={handleChange}
-                  />
-                </Form.Group>
-                <Button type="submit" disabled={!isValid || isSubmitting}>
-                  CONTINUAR
-                  {isSubmitting && (
-                    <Spinner
-                      as="span"
-                      animation="border"
-                      size="sm"
-                      role="status"
-                      aria-hidden="true"
-                    />
-                  )}
-                </Button>
-              </Form>
-            )}
-          </Formik>
-        </Container>
-      </div>
+                )}
+              </Button>
+            </Form>
+          )}
+        </Formik>
+      </Container>
     </div>
   );
 }

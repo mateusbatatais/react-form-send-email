@@ -1,1 +1,22 @@
+$primary: #457b82;
+$body-bg: #fffbed;
+
 @import "~bootstrap/scss/bootstrap";
+
+.text-blue {
+  color: $primary;
+}
+
+.text-light-custom {
+  a {
+    color: $body-bg;
+  }
+  color: $body-bg;
+}
+.bgBlack {
+  background-color: #1f1f1f;
+}
+body {
+  text-transform: uppercase;
+  letter-spacing: -0.05em;
+}

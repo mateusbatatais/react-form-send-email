@@ -23,6 +23,7 @@ function ListItens() {
             <th>DATA DE EMISSÃO</th>
             <th>ORGÃO EMISSOR</th>
             <th>SEXO</th>
+            <th>AÇÃO</th>
           </tr>
         </thead>
         <tbody>
@@ -34,6 +35,7 @@ function ListItens() {
                 <td>{item.dataEmissao}</td>
                 <td>{item.orgaoEmissor}</td>
                 <td>{item.sexo}</td>
+                <td></td>
               </tr>
             ))}
         </tbody>
