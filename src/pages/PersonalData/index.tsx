@@ -6,6 +6,7 @@ import { Formik } from "formik";
 import MaskedInput from "react-maskedinput";
 import selectData from "../../data/orgaoEmissor.json";
 import { parse } from "date-fns";
+import { FormValues } from "../../interfaces/formValues";
 
 function PersonaData() {
   const schema = yup.object().shape({
@@ -25,12 +26,7 @@ function PersonaData() {
       test: (value: any) => value.length > 0,
     }),
   });
-  interface FormValues {
-    rg: string;
-    dataEmissao: string;
-    orgaoEmissor: string;
-    sexo: string[];
-  }
+
   const [status, setStatus] = useState("");
   const sendForm = (values: FormValues) => {
     try {
