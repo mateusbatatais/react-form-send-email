@@ -6,12 +6,18 @@ import * as yup from "yup";
 import { Formik } from "formik";
 import MaskedInput from "react-maskedinput";
 import selectData from "./data/orgaoEmissor.json";
+import { parse } from "date-fns";
 
 function App() {
   const schema = yup.object().shape({
     rg: yup.string().required("O RG é obrigatório"),
-    dataEmissao: yup.date().required("Preencha a data"),
-    //melhorar validação da data dd/mm/yyyy
+    dataEmissao: yup
+      .date()
+      .transform((value, originalValue) =>
+        parse(originalValue, "dd/MM/yyyy", new Date())
+      )
+      .required("Preencha a data")
+      .typeError("A data está no formato inválido"),
     orgaoEmissor: yup.string().required("Escolha uma opção"),
     sexo: yup.array().test({
       name: "verifica sexo",
@@ -20,7 +26,6 @@ function App() {
       test: (value: any) => value.length > 0,
     }),
     //criar validação geral do form
-    //validar outros campos apenas ao submit
   });
   interface FormValues {
     rg: string;
@@ -52,6 +57,7 @@ function App() {
           <h1>DADOS PESSOAIS</h1>
           <Formik
             validationSchema={schema}
+            validateOnBlur={false}
             onSubmit={sendForm}
             initialValues={{
               rg: "",
