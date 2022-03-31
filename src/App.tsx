@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, Form, Button, Spinner } from "react-bootstrap";
+import { Container, Form, Button, Spinner, Alert } from "react-bootstrap";
 import "./App.scss";
 import api from "./services/api";
 import * as yup from "yup";
@@ -25,7 +25,6 @@ function App() {
       message: "Você precisa escolher seu sexo",
       test: (value: any) => value.length > 0,
     }),
-    //criar validação geral do form
   });
   interface FormValues {
     rg: string;
@@ -33,20 +32,25 @@ function App() {
     orgaoEmissor: string;
     sexo: string[];
   }
-
+  const [status, setStatus] = useState("");
   const sendForm = (values: FormValues) => {
     try {
       return api
         .post("/Contact", values)
-        .then((res) => console.log(res))
+        .then((res) => {
+          res.status >= 200 && res.status < 300
+            ? setStatus("success")
+            : setStatus("danger");
+          console.log(res);
+        })
         .catch((err) => {
+          setStatus("danger");
           console.log(err);
         });
     } catch (err) {
       console.log("ERRO");
     }
   };
-
   return (
     <div className="App">
       <header className="App-header">
@@ -54,6 +58,19 @@ function App() {
       </header>
       <div>
         <Container>
+          {status !== "" && (
+            <Alert variant={status}>
+              <Alert.Heading>
+                {status === "success" ? "Perfeito!" : "Aconteceu um erro"}
+              </Alert.Heading>
+              <p>
+                {status === "success"
+                  ? "Seu formulário foi enviado com sucesso"
+                  : "Algo não ocorreu como esperado. Tente novamente mais tarde"}
+              </p>
+              <hr />
+            </Alert>
+          )}
           <h1>DADOS PESSOAIS</h1>
           <Formik
             validationSchema={schema}
