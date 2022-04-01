@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Container, Table } from "react-bootstrap";
+import { Container, Spinner, Table } from "react-bootstrap";
 import api from "../../services/api";
 import { FormValues } from "../../interfaces/formValues";
 
 function ListItens() {
   const [data, setData] = useState<FormValues[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+
   const listItens = () => {
-    api.get("/Contact").then((response) => setData(response.data));
+    api.get("/Contact").then((response) => {
+      setLoading(false);
+      setData(response.data);
+    });
   };
 
   useEffect(() => {
@@ -27,7 +32,20 @@ function ListItens() {
           </tr>
         </thead>
         <tbody>
-          {data &&
+          {loading ? (
+            <tr>
+              <td className="my-3" colSpan={6}>
+                <Spinner
+                  as="span"
+                  animation="border"
+                  size="sm"
+                  role="status"
+                  aria-hidden="true"
+                />
+              </td>
+            </tr>
+          ) : (
+            data &&
             data.map((item: FormValues, index: number) => (
               <tr key={index}>
                 <td>{index}</td>
@@ -37,7 +55,8 @@ function ListItens() {
                 <td>{item.sexo}</td>
                 <td></td>
               </tr>
-            ))}
+            ))
+          )}
         </tbody>
       </Table>
     </Container>
