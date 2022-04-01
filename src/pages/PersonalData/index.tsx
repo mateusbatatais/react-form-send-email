@@ -59,22 +59,22 @@ function PersonaData() {
       <div className={`pt-3 text-light-custom ${styles.bgSoftBlack}`}>
         <Container>
           <Row>
-            <Col className="pb-3" md={6} lg={3}>
+            <Col className="pb-3" md={3}>
               <small className="text-blue">me chamo</small>
               <h5>Paul Irish</h5>
               <small>
                 <span className="text-blue">CPF</span> 130.212.150-41
               </small>
             </Col>
-            <Col className="pb-3" md={6} lg={3}>
+            <Col className="pb-3" md={3}>
               <small className="text-blue">preciso de</small>
               <h5>R$ 2.000</h5>
             </Col>
-            <Col className="pb-3" md={6} lg={3}>
+            <Col className="pb-3" md={3}>
               <small className="text-blue">quero pagar em</small>
               <h5>12 vezes</h5>
             </Col>
-            <Col className="pb-3" md={6} lg={3}>
+            <Col className="pb-3" md={3}>
               <small className="text-blue">para</small>
               <h5>Comprar uma bike</h5>
             </Col>
