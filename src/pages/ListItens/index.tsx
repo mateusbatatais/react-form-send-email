@@ -44,8 +44,7 @@ function ListItens() {
                 />
               </td>
             </tr>
-          ) : (
-            data &&
+          ) : data ? (
             data.map((item: FormValues, index: number) => (
               <tr key={index}>
                 <td>{index}</td>
@@ -56,6 +55,12 @@ function ListItens() {
                 <td></td>
               </tr>
             ))
+          ) : (
+            <tr>
+              <td className="my-3" colSpan={6}>
+                Nada a exibir
+              </td>
+            </tr>
           )}
         </tbody>
       </Table>
