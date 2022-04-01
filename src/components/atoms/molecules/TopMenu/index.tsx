@@ -1,11 +1,15 @@
 import React from "react";
 import { Container, Nav } from "react-bootstrap";
+import styles from "./style.module.scss";
 
 function TopMenu() {
   return (
     <header className="bgBlack text-light-custom">
       <Container>
-        <Nav className="justify-content-end" activeKey="/home">
+        <Nav
+          className={`${styles.menuNav} menuNav text justify-content-end py-4`}
+          activeKey="/home"
+        >
           <Nav.Item>
             <Nav.Link href="/">Home</Nav.Link>
           </Nav.Item>

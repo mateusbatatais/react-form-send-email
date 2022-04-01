@@ -15,7 +15,7 @@ function ListItens() {
 
   return (
     <Container>
-      <Table striped bordered hover>
+      <Table className="mt-5" striped bordered hover responsive>
         <thead>
           <tr>
             <th>#</th>

@@ -3,6 +3,20 @@ $body-bg: #fffbed;
 
 @import "~bootstrap/scss/bootstrap";
 
+//RESET
+
+table > tbody > tr > td:last-child,
+table > thead > tr:last-child > th:last-child {
+  position: sticky;
+  position: -webkit-sticky;
+  right: 0;
+  z-index: 1;
+  text-align: center;
+  background-color: #fffbed;
+}
+
+//GENERAL
+
 .text-blue {
   color: $primary;
 }
