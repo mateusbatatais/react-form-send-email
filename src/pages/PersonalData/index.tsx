@@ -161,7 +161,9 @@ function PersonaData() {
                   <Form.Control
                     type="text"
                     name="rg"
-                    maxLength={15}
+                    as={MaskedInput}
+                    mask="11 111 111"
+                    placeholder=""
                     value={values.rg}
                     onChange={handleChange}
                     isValid={touched.rg && !errors.rg}
@@ -177,6 +179,7 @@ function PersonaData() {
                     type="text"
                     as={MaskedInput}
                     mask="11/11/1111"
+                    placeholder=""
                     name="dataEmissao"
                     value={values.dataEmissao}
                     onChange={handleChange}
@@ -208,34 +211,53 @@ function PersonaData() {
 
               <Form.Group controlId="sexo">
                 <Form.Label>SEXO</Form.Label>
-                <Form.Check
-                  className={
-                    values.sexo && values.sexo[0] === "Feminino" ? "d-none" : ""
-                  }
-                  isValid={touched.sexo && !errors.sexo}
-                  isInvalid={!!errors.sexo}
-                  inline
-                  label="Masculino"
-                  name="sexo"
-                  type="checkbox"
-                  value="Masculino"
-                  onChange={handleChange}
-                />
-                <Form.Check
-                  className={
-                    values.sexo && values.sexo[0] === "Masculino"
-                      ? "d-none"
-                      : ""
-                  }
-                  isValid={touched.sexo && !errors.sexo}
-                  isInvalid={!!errors.sexo}
-                  inline
-                  label="Feminino"
-                  name="sexo"
-                  value="Feminino"
-                  type="checkbox"
-                  onChange={handleChange}
-                />
+                <div className={!!errors.sexo ? "is-valid" : ""}>
+                  <Form.Check
+                    className={`${styles.btnCustom} ${
+                      values.sexo && values.sexo[0] === "Feminino"
+                        ? "d-none"
+                        : ""
+                    } ${
+                      values.sexo && values.sexo[0] === "Masculino"
+                        ? "btn-selected"
+                        : ""
+                    }`}
+                    isValid={touched.sexo && !errors.sexo}
+                    inline
+                    label="Masculino"
+                    name="sexo"
+                    id="M"
+                    type="checkbox"
+                    value="Masculino"
+                    onChange={handleChange}
+                  />
+                  <Form.Check
+                    className={`${styles.btnCustom} ${
+                      values.sexo && values.sexo[0] === "Masculino"
+                        ? "d-none"
+                        : ""
+                    } ${
+                      values.sexo && values.sexo[0] === "Feminino"
+                        ? "btn-selected"
+                        : ""
+                    }`}
+                    isValid={touched.sexo && !errors.sexo}
+                    inline
+                    label="Feminino"
+                    name="sexo"
+                    id="F"
+                    value="Feminino"
+                    type="checkbox"
+                    onChange={handleChange}
+                  />
+                </div>
+                <div
+                  className={`invalid-feedback ${
+                    !!errors.sexo ? "d-flex" : ""
+                  }`}
+                >
+                  {errors.sexo}
+                </div>
               </Form.Group>
 
               <Button type="submit" disabled={!isValid || isSubmitting}>

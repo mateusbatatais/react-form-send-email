@@ -15,6 +15,15 @@ table > thead > tr:last-child > th:last-child {
   background-color: #fffbed;
 }
 
+input[type=checkbox]{
+  display: none;
+}
+
+.form-control, .form-select{
+  border-radius: 0;
+  border: 2px solid ;
+}
+
 //GENERAL
 
 .text-blue {
@@ -33,4 +42,10 @@ table > thead > tr:last-child > th:last-child {
 body {
   text-transform: uppercase;
   letter-spacing: -0.05em;
+}
+.btn-selected{
+  label{
+    background-color: #2b2b2b;
+    color: #eae4d6;
+  }
 }

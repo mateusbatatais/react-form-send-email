@@ -44,7 +44,7 @@ function ListItens() {
                 />
               </td>
             </tr>
-          ) : data ? (
+          ) : data && data.length ? (
             data.map((item: FormValues, index: number) => (
               <tr key={index}>
                 <td>{index}</td>
