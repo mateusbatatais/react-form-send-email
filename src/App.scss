@@ -13,6 +13,8 @@ table > thead > tr:last-child > th:last-child {
   z-index: 1;
   text-align: center;
   background-color: #fffbed;
+  width: 150px;
+  padding: 4px 0 0 0;
 }
 
 input[type=checkbox]{
@@ -22,6 +24,9 @@ input[type=checkbox]{
 .form-control, .form-select{
   border-radius: 0;
   border: 2px solid ;
+}
+.form-label{
+  font-size: 80%;
 }
 
 //GENERAL

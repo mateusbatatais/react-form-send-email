@@ -208,10 +208,9 @@ function PersonaData() {
                   </Form.Control.Feedback>
                 </Form.Group>
               </Row>
-
-              <Form.Group controlId="sexo">
-                <Form.Label>SEXO</Form.Label>
-                <div className={!!errors.sexo ? "is-valid" : ""}>
+              <Row className="my-3">
+                <Form.Group controlId="sexo">
+                  <Form.Label>SEXO</Form.Label>
                   <Form.Check
                     className={`${styles.btnCustom} ${
                       values.sexo && values.sexo[0] === "Feminino"
@@ -250,16 +249,15 @@ function PersonaData() {
                     type="checkbox"
                     onChange={handleChange}
                   />
-                </div>
-                <div
-                  className={`invalid-feedback ${
-                    !!errors.sexo ? "d-flex" : ""
-                  }`}
-                >
-                  {errors.sexo}
-                </div>
-              </Form.Group>
-
+                  <div
+                    className={`invalid-feedback ${
+                      !!errors.sexo ? "d-flex" : ""
+                    }`}
+                  >
+                    {errors.sexo}
+                  </div>
+                </Form.Group>
+              </Row>
               <Button type="submit" disabled={!isValid || isSubmitting}>
                 CONTINUAR
                 {isSubmitting && (
