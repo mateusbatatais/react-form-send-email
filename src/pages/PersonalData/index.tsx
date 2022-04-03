@@ -139,6 +139,7 @@ function PersonaData() {
           validateOnBlur={false}
           onSubmit={sendForm}
           initialValues={{
+            id: 0,
             rg: "",
             dataEmissao: "",
             orgaoEmissor: "",

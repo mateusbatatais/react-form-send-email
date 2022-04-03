@@ -1,9 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { Container, Spinner, Table, Button, Modal } from "react-bootstrap";
+import {
+  Container,
+  Spinner,
+  Table,
+  Button,
+  Modal,
+  Alert,
+} from "react-bootstrap";
 import api from "../../services/api";
 import { FormValues } from "../../interfaces/formValues";
+import ModalDeleteConfirm from "../../components/atoms/molecules/ModalDeleteConfirm";
 
 function ListItens() {
+  const [status, setStatus] = useState("");
+
   const [data, setData] = useState<FormValues[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -11,15 +21,17 @@ function ListItens() {
   const handleCloseE = () => setShowE(false);
   const handleShowE = () => setShowE(true);
 
-  const [showX, setShowX] = useState<boolean>(false);
-  const handleCloseX = () => setShowX(false);
-  const handleShowX = () => setShowX(true);
-
   const listItens = () => {
     api.get("/Contact").then((response) => {
       setLoading(false);
       setData(response.data);
     });
+  };
+
+  const onDelete = () => {
+    console.log("deletou");
+    setStatus("success");
+    listItens();
   };
 
   useEffect(() => {
@@ -29,6 +41,20 @@ function ListItens() {
   return (
     <>
       <Container>
+        {status !== "" && (
+          <Alert variant={status} className="mt-3">
+            <Alert.Heading>
+              {status === "success" ? "Perfeito!" : "Aconteceu um erro"}
+            </Alert.Heading>
+            <p>
+              {status === "success"
+                ? "Seu formulário foi enviado com sucesso"
+                : "Algo não ocorreu como esperado. Tente novamente mais tarde"}
+            </p>
+            <hr />
+          </Alert>
+        )}
+
         <Table className="mt-5" striped bordered hover responsive>
           <thead>
             <tr>
@@ -71,14 +97,7 @@ function ListItens() {
                     >
                       Editar
                     </Button>
-                    <Button
-                      variant="danger"
-                      className="me-1 mb-1"
-                      size="sm"
-                      onClick={handleShowX}
-                    >
-                      Excluir
-                    </Button>
+                    <ModalDeleteConfirm id={item.id} onDelete={onDelete} />
                   </td>
                 </tr>
               ))
@@ -104,23 +123,6 @@ function ListItens() {
           </Button>
           <Button variant="primary" onClick={handleCloseE}>
             Salvar
-          </Button>
-        </Modal.Footer>
-      </Modal>
-
-      <Modal show={showX} onHide={handleCloseX}>
-        <Modal.Header closeButton>
-          <Modal.Title>Confirma exclusão?</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          Cuidado, essa ação não tem volta! Podemos excluir?
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseX}>
-            Voltar
-          </Button>
-          <Button variant="danger" onClick={handleCloseX}>
-            Excluir
           </Button>
         </Modal.Footer>
       </Modal>
