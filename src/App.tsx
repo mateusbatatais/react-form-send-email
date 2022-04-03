@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.scss";
 
-import TopMenu from "./components/atoms/molecules/TopMenu";
+import TopMenu from "./components/molecules/TopMenu";
 
 import PersonaData from "./pages/PersonalData";
 import ListItens from "./pages/ListItens";

@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { Modal, Button, Form, Row, Col, Spinner } from "react-bootstrap";
-import api from "../../../../services/api";
-import { FormValues } from "../../../../interfaces/formValues";
+import { Modal, Button, Form, Spinner } from "react-bootstrap";
+import api from "../../../services/api";
+import { FormValues } from "../../../interfaces/formValues";
 import { Formik } from "formik";
 import * as yup from "yup";
 import { parse } from "date-fns";
 import MaskedInput from "react-maskedinput";
-import selectData from "../../../../data/orgaoEmissor.json";
+import selectData from "../../../data/orgaoEmissor.json";
 
 interface Props {
   item: FormValues;

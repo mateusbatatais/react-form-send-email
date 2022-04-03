@@ -9,8 +9,8 @@ import {
 } from "react-bootstrap";
 import api from "../../services/api";
 import { FormValues } from "../../interfaces/formValues";
-import ModalDeleteConfirm from "../../components/atoms/molecules/ModalDeleteConfirm";
-import ModalEdit from "../../components/atoms/molecules/ModalEdit";
+import ModalDeleteConfirm from "../../components/organism/ModalDeleteConfirm";
+import ModalEdit from "../../components/organism/ModalEdit";
 
 function ListItens() {
   const [status, setStatus] = useState("");

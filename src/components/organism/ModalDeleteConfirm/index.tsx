@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
-import api from "../../../../services/api";
+import api from "../../../services/api";
 
 interface Props {
   id: number;
