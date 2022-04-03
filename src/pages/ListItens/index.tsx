@@ -10,16 +10,14 @@ import {
 import api from "../../services/api";
 import { FormValues } from "../../interfaces/formValues";
 import ModalDeleteConfirm from "../../components/atoms/molecules/ModalDeleteConfirm";
+import ModalEdit from "../../components/atoms/molecules/ModalEdit";
 
 function ListItens() {
   const [status, setStatus] = useState("");
+  const [feedbackMsg, setFeedbackMsg] = useState("");
 
   const [data, setData] = useState<FormValues[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-
-  const [showE, setShowE] = useState<boolean>(false);
-  const handleCloseE = () => setShowE(false);
-  const handleShowE = () => setShowE(true);
 
   const listItens = () => {
     api.get("/Contact").then((response) => {
@@ -29,8 +27,14 @@ function ListItens() {
   };
 
   const onDelete = () => {
-    console.log("deletou");
     setStatus("success");
+    setFeedbackMsg("Campo excluido com sucesso!");
+    listItens();
+  };
+
+  const onEdit = () => {
+    setStatus("success");
+    setFeedbackMsg("Dados alterados com sucesso!");
     listItens();
   };
 
@@ -43,15 +47,7 @@ function ListItens() {
       <Container>
         {status !== "" && (
           <Alert variant={status} className="mt-3">
-            <Alert.Heading>
-              {status === "success" ? "Perfeito!" : "Aconteceu um erro"}
-            </Alert.Heading>
-            <p>
-              {status === "success"
-                ? "Seu formulário foi enviado com sucesso"
-                : "Algo não ocorreu como esperado. Tente novamente mais tarde"}
-            </p>
-            <hr />
+            {feedbackMsg}
           </Alert>
         )}
 
@@ -88,15 +84,7 @@ function ListItens() {
                   <td>{item.orgaoEmissor}</td>
                   <td>{item.sexo}</td>
                   <td>
-                    {" "}
-                    <Button
-                      variant="primary"
-                      className="me-1 mb-1"
-                      size="sm"
-                      onClick={handleShowE}
-                    >
-                      Editar
-                    </Button>
+                    <ModalEdit item={item} onEdit={onEdit} />
                     <ModalDeleteConfirm id={item.id} onDelete={onDelete} />
                   </td>
                 </tr>
@@ -111,21 +99,6 @@ function ListItens() {
           </tbody>
         </Table>
       </Container>
-
-      <Modal show={showE} onHide={handleCloseE}>
-        <Modal.Header closeButton>
-          <Modal.Title>Edição de dados</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Campos</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseE}>
-            Cancelar
-          </Button>
-          <Button variant="primary" onClick={handleCloseE}>
-            Salvar
-          </Button>
-        </Modal.Footer>
-      </Modal>
     </>
   );
 }

@@ -121,15 +121,10 @@ function PersonaData() {
       </div>
       <Container className="pb-5">
         {status !== "" && (
-          <Alert variant={status}>
-            <Alert.Heading>
-              {status === "success" ? "Perfeito!" : "Aconteceu um erro"}
-            </Alert.Heading>
-            <p>
-              {status === "success"
-                ? "Seu formulário foi enviado com sucesso"
-                : "Algo não ocorreu como esperado. Tente novamente mais tarde"}
-            </p>
+          <Alert variant={status} className="mt-3">
+            {status === "success"
+              ? "Cadastro realizado com sucesso"
+              : "Algo não ocorreu como esperado. Tente novamente mais tarde"}
             <hr />
           </Alert>
         )}
