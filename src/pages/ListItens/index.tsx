@@ -19,15 +19,13 @@ function ListItens() {
     });
   };
 
-  const onDelete = () => {
+  const onSave = (type: string) => {
     setStatus("success");
-    setFeedbackMsg("Campo excluido com sucesso!");
-    listItens();
-  };
-
-  const onEdit = () => {
-    setStatus("success");
-    setFeedbackMsg("Dados alterados com sucesso!");
+    setFeedbackMsg(
+      type === "edit"
+        ? "Dados alterados com sucesso!"
+        : "Campo excluido com sucesso!"
+    );
     listItens();
   };
 
@@ -77,8 +75,11 @@ function ListItens() {
                   <td>{item.orgaoEmissor}</td>
                   <td>{item.sexo}</td>
                   <td>
-                    <ModalEdit item={item} onEdit={onEdit} />
-                    <ModalDeleteConfirm id={item.id} onDelete={onDelete} />
+                    <ModalEdit item={item} onEdit={() => onSave("edit")} />
+                    <ModalDeleteConfirm
+                      id={item.id}
+                      onDelete={() => onSave("delete")}
+                    />
                   </td>
                 </tr>
               ))
