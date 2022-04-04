@@ -1,12 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  Container,
-  Spinner,
-  Table,
-  Button,
-  Modal,
-  Alert,
-} from "react-bootstrap";
+import { Container, Spinner, Table, Alert } from "react-bootstrap";
 import api from "../../services/api";
 import { FormValues } from "../../interfaces/formValues";
 import ModalDeleteConfirm from "../../components/organism/ModalDeleteConfirm";
