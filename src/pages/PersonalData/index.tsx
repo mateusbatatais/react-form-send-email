@@ -119,7 +119,7 @@ function PersonaData() {
           </Row>
         </Container>
       </div>
-      <Container className="pb-5">
+      <Container className="pb-5 w-75">
         {status !== "" && (
           <Alert variant={status} className="mt-3">
             {status === "success"
@@ -151,8 +151,13 @@ function PersonaData() {
             isSubmitting,
           }) => (
             <Form onSubmit={handleSubmit}>
-              <Row>
-                <Form.Group controlId="rgCtrl" as={Col} sm={4}>
+              <Row className="ahifen">
+                <Form.Group
+                  controlId="rgCtrl"
+                  as={Col}
+                  sm={4}
+                  className="px-1 my-1"
+                >
                   <Form.Label>NÚMERO DO RG</Form.Label>
                   <Form.Control
                     type="text"
@@ -169,7 +174,12 @@ function PersonaData() {
                     {errors.rg}
                   </Form.Control.Feedback>
                 </Form.Group>
-                <Form.Group controlId="dataEmissaoCtrl" as={Col} sm={4}>
+                <Form.Group
+                  controlId="dataEmissaoCtrl"
+                  as={Col}
+                  sm={4}
+                  className="px-1 my-1"
+                >
                   <Form.Label>DATA DE EMISSÃO</Form.Label>
                   <Form.Control
                     type="text"
@@ -186,7 +196,12 @@ function PersonaData() {
                     {errors.dataEmissao}
                   </Form.Control.Feedback>
                 </Form.Group>
-                <Form.Group controlId="orgaoEmissor" as={Col} sm={4}>
+                <Form.Group
+                  controlId="orgaoEmissor"
+                  as={Col}
+                  sm={4}
+                  className="px-1 my-1"
+                >
                   <Form.Label>ORGÃO EMISSOR</Form.Label>
                   <Form.Select
                     isValid={touched.orgaoEmissor && !errors.orgaoEmissor}
@@ -204,11 +219,14 @@ function PersonaData() {
                   </Form.Control.Feedback>
                 </Form.Group>
               </Row>
-              <Row className="my-3">
-                <Form.Group controlId="sexo">
-                  <Form.Label>SEXO</Form.Label>
+              <Row>
+                <Form.Group
+                  controlId="sexo"
+                  className={`${styles.grpSexo} my-3 px-1`}
+                >
+                  <Form.Label className="me-2">SEXO</Form.Label>
                   <Form.Check
-                    className={`${styles.btnCustom} ${
+                    className={`btn-custom ${
                       values.sexo && values.sexo[0] === "Feminino"
                         ? "d-none"
                         : ""
@@ -227,7 +245,7 @@ function PersonaData() {
                     onChange={handleChange}
                   />
                   <Form.Check
-                    className={`${styles.btnCustom} ${
+                    className={` btn-custom ${
                       values.sexo && values.sexo[0] === "Masculino"
                         ? "d-none"
                         : ""
@@ -235,7 +253,7 @@ function PersonaData() {
                       values.sexo && values.sexo[0] === "Feminino"
                         ? "btn-selected"
                         : ""
-                    }`}
+                    } ${styles.selectF}`}
                     isValid={touched.sexo && !errors.sexo}
                     inline
                     label="Feminino"
@@ -254,18 +272,26 @@ function PersonaData() {
                   </div>
                 </Form.Group>
               </Row>
-              <Button type="submit" disabled={!isValid || isSubmitting}>
-                CONTINUAR
-                {isSubmitting && (
-                  <Spinner
-                    as="span"
-                    animation="border"
-                    size="sm"
-                    role="status"
-                    aria-hidden="true"
-                  />
-                )}
-              </Button>
+              <Row className="justify-content-center px-1">
+                <Button
+                  className="btn-confirm"
+                  type="submit"
+                  disabled={!isValid || isSubmitting}
+                >
+                  CONTINUAR
+                  {isSubmitting ? (
+                    <Spinner
+                      as="span"
+                      animation="border"
+                      size="sm"
+                      role="status"
+                      aria-hidden="true"
+                    />
+                  ) : (
+                    <span className="ms-2">▸</span>
+                  )}
+                </Button>
+              </Row>
             </Form>
           )}
         </Formik>

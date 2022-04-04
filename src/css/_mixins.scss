@@ -1,0 +1,10 @@
+@mixin beforehifen($top, $left) {
+  position: relative;
+  &::before {
+    content: "-";
+    position: absolute;
+    font-weight: bold;
+    top: $top;
+    left: $left;
+  }
+}

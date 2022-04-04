@@ -1,0 +1,108 @@
+@import "./vars";
+@import "~bootstrap/scss/bootstrap";
+
+//BOOTSTRAP COMPONENTS
+@import "./mixins";
+
+//RESET
+
+table > tbody > tr > td:last-child,
+table > thead > tr:last-child > th:last-child {
+  position: sticky;
+  position: -webkit-sticky;
+  right: 0;
+  z-index: 1;
+  text-align: center;
+  background-color: #fffbed;
+  width: 150px;
+  padding: 4px 0 0 0;
+}
+
+input[type="checkbox"] {
+  display: none;
+}
+
+.form-control,
+.form-select {
+  border-radius: 0;
+  border: 2px solid;
+}
+.form-label {
+  font-size: 80%;
+  padding-bottom: 0rem;
+  margin-bottom: 0.2rem;
+  font-weight: bold;
+}
+.form-check {
+  padding-left: 0;
+}
+
+//GENERAL
+
+.text-blue {
+  color: $primary;
+}
+
+.text-light-custom {
+  a {
+    color: $body-bg;
+  }
+  color: $body-bg;
+}
+.bgBlack {
+  background-color: $black;
+}
+body {
+  text-transform: uppercase;
+  letter-spacing: -0.05em;
+}
+
+.btn-custom {
+  margin: 0;
+  padding: 0;
+  label {
+    border: 2px solid;
+    padding: 6px 25px;
+    cursor: pointer;
+    font-weight: bold;
+    min-width: 150px;
+  }
+}
+.btn-selected {
+  label {
+    background-color: $blackGray;
+    color: #eae4d6;
+  }
+  &::before {
+    content: "" !important;
+  }
+}
+.btn-confirm {
+  border-radius: 0cm;
+  margin: 0 3px;
+  padding: 6px 40px;
+  font-weight: bold;
+  background-color: $blackGray;
+
+  &:disabled {
+    background-color: $blackGray;
+    border: none;
+  }
+
+  @media only screen and (min-width: 451px) {
+    max-width: 230px;
+  }
+  span {
+    font-size: 30px;
+    vertical-align: sub;
+    line-height: 0.4;
+  }
+}
+
+@include media-breakpoint-up(sm) {
+  .ahifen {
+    > div:not(:first-child) {
+      @include beforehifen(31px, -3px);
+    }
+  }
+}

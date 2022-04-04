@@ -132,7 +132,7 @@ function ModalEdit({ item, onEdit }: Props) {
                 <Form.Group controlId="sexo">
                   <Form.Label>SEXO</Form.Label>
                   <Form.Check
-                    className={`${
+                    className={`btn-custom mb-2 ${
                       values.sexo && values.sexo[0] === "Feminino"
                         ? "d-none"
                         : ""
@@ -142,7 +142,6 @@ function ModalEdit({ item, onEdit }: Props) {
                         : ""
                     }`}
                     isValid={touched.sexo && !errors.sexo}
-                    inline
                     label="Masculino"
                     name="sexo"
                     id="M"
@@ -151,7 +150,7 @@ function ModalEdit({ item, onEdit }: Props) {
                     onChange={handleChange}
                   />
                   <Form.Check
-                    className={` ${
+                    className={`btn-custom ${
                       values.sexo && values.sexo[0] === "Masculino"
                         ? "d-none"
                         : ""
@@ -161,7 +160,6 @@ function ModalEdit({ item, onEdit }: Props) {
                         : ""
                     }`}
                     isValid={touched.sexo && !errors.sexo}
-                    inline
                     label="Feminino"
                     name="sexo"
                     id="F"
