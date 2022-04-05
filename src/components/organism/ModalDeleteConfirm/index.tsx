@@ -4,7 +4,7 @@ import api from "../../../services/api";
 
 interface Props {
   id: number;
-  onDelete?: any;
+  onDelete: () => void;
 }
 
 function ModalDeleteConfirm({ id, onDelete }: Props) {

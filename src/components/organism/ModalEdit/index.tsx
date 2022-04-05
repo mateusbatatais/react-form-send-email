@@ -10,7 +10,7 @@ import selectData from "../../../data/orgaoEmissor.json";
 
 interface Props {
   item: FormValues;
-  onEdit?: any;
+  onEdit: () => void;
 }
 
 function ModalEdit({ item, onEdit }: Props) {

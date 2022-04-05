@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testa top header snapshot 1`] = `
+<div>
+  <header
+    class="bgBlack text-light-custom"
+  >
+    <div
+      class="container"
+    >
+      <div
+        class="menuNav menuNav text justify-content-end py-4 nav"
+      >
+        <div
+          class="nav-item"
+        >
+          <a
+            class="nav-link"
+            data-rr-ui-event-key="/"
+            href="/"
+          >
+            Home
+          </a>
+        </div>
+        <div
+          class="nav-item"
+        >
+          <a
+            class="nav-link"
+            data-rr-ui-event-key="/listagem"
+            href="/listagem"
+          >
+            Itens cadastrados
+          </a>
+        </div>
+        <div
+          class="nav-item"
+        >
+          <a
+            class="nav-link"
+            data-rr-ui-event-key="/"
+            href="/"
+          >
+            Como funciona
+          </a>
+        </div>
+        <div
+          class="nav-item"
+        >
+          <a
+            class="nav-link"
+            data-rr-ui-event-key="/"
+            href="/"
+          >
+            Privacidade
+          </a>
+        </div>
+        <div
+          class="nav-item"
+        >
+          <a
+            class="nav-link"
+            data-rr-ui-event-key="/"
+            href="/"
+          >
+            Ajuda
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+</div>
+`;
