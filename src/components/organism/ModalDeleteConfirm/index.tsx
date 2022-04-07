@@ -41,6 +41,7 @@ function ModalDeleteConfirm({ id, onDelete }: Props) {
         variant="danger"
         className="me-1 mb-1"
         size="sm"
+        name="deletar"
         onClick={handleShow}
       >
         Excluir
