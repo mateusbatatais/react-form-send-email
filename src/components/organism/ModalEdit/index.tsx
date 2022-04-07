@@ -205,7 +205,6 @@ function ModalEdit({ item, onEdit }: Props) {
         variant="primary"
         className="me-1 mb-1"
         size="sm"
-        name="editar"
         onClick={handleShow}
       >
         Editar

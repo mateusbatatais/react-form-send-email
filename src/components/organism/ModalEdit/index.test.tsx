@@ -11,7 +11,7 @@ const mock = {
 };
 
 describe("testes modal editar", () => {
-  it("exibe botão deletar", () => {
+  it("exibe botão editar", () => {
     render(<ModalEdit item={mock} onEdit={() => ""} />);
     const bt = screen.getByRole("button", { name: /editar/i });
     expect(bt).toBeInTheDocument();
